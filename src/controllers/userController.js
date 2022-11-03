@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
+const user2Model = require("../models/user2Model");
+const middleware = require("../middleware/middleware.js");
 
 /*
   Read all the comments multiple times to understand why we are doing what we are doing in login api and getUserData api
@@ -91,6 +93,48 @@ const updateUser = async function (req, res) {
   let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData);
   res.send({ status: updatedUser, data: updatedUser });
 };
+
+const createUser1 = async function (req, res) {
+  
+  let data = req.body;
+  let savedData = await user2Model.create(data);
+  //console.log(abcd.newAtribute);
+  res.send({ msg: savedData });
+};
+
+const loginDetailsFurther = async function (req, res) {
+  let uniqueToken = jwt.sign({come:"go", here:"there"},'aliabbas-backend-cohort')
+  res.send({status:true, token:uniqueToken})
+  
+};
+
+const tokenDetailsFurther = async function (req, res) {
+  let userId= req.params.userId
+  res.send({msg:userId})
+}
+const updateUserData = async function (req, res) {
+  let userId= req.params.userId
+  console.log(userId)
+  let update= await user2Model.findOneAndUpdate({_id:userId}, {$set:{verification:"done"}},{new:true})
+  let data= await user2Model.find()
+  res.send({msg:update})
+}
+const deleteUserData = async function (req, res) {
+  let userId= req.params.userId
+  console.log(userId)
+  let update= await user2Model.findOneAndUpdate({_id:userId}, {$set:{isDeleted:true}},{new:true})
+  
+  res.send({msg:update})
+}
+
+
+module.exports.deleteUserData= deleteUserData;
+module.exports.updateUserData = updateUserData;
+
+module.exports.tokenDetailsFurther= tokenDetailsFurther;
+module.exports.loginDetailsFurther= loginDetailsFurther;
+
+module.exports.createUser1 = createUser1;
 
 module.exports.createUser = createUser;
 module.exports.getUserData = getUserData;
