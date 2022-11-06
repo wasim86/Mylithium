@@ -36,10 +36,10 @@ const loginUser = async function (req, res) {
   let token = jwt.sign(
     {
       userId: user._id.toString(),
-      batch: "thorium",
+      batch: "lithium",
       organisation: "FunctionUp",
     },
-    "functionup-plutonium-very-very-secret-key"
+    "functionup-lithium-very-very-secret-key"
   );
   res.setHeader("x-auth-token", token);
   res.send({ status: true, token: token });
@@ -63,7 +63,7 @@ const getUserData = async function (req, res) {
   // Decoding requires the secret again. 
   // A token can only be decoded successfully if the same secret was used to create(sign) that token.
   // And because this token is only known to the server, it can be assumed that if a token is decoded at server then this token must have been issued by the same server in past.
-  let decodedToken = jwt.verify(token, "functionup-plutonium-very-very-secret-key");
+  let decodedToken = jwt.verify(token, "functionup-lithium-very-very-secret-key");
   if (!decodedToken)
     return res.send({ status: false, msg: "token is invalid" });
 
@@ -103,7 +103,7 @@ const createUser1 = async function (req, res) {
 };
 
 const loginDetailsFurther = async function (req, res) {
-  let uniqueToken = jwt.sign({come:"go", here:"there"},'aliabbas-backend-cohort')
+  let uniqueToken = jwt.sign({come:"go", here:"there"},'wasim-backend-cohort')
   res.send({status:true, token:uniqueToken})
   
 };

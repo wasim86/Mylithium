@@ -36,7 +36,7 @@ const tokenDetails =  async function (req, res, next){
 
 const tokenVerification = async function(req, res, next){
     let token= req.headers["x-auth-token"]
-    let verification = jwt.verify(token,"aliabbas-backend-cohort")
+    let verification = jwt.verify(token,"wasim-backend-cohort")
     if(verification){
         next()
     }else{
