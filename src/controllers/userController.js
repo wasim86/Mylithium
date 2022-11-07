@@ -92,6 +92,7 @@ const postMessage = async function (req, res) {
     let token = req.headers["x-auth-token"]
     if(!token) return res.send({status: false, msg: "token must be present in the request header"})
     let decodedToken = jwt.verify(token, 'functionup-thorium')
+    console.log(decodedToken)
 
     if(!decodedToken) return res.send({status: false, msg:"token is not valid"})
     

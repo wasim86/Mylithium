@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
+const mongoose= require("mongoose")
+const user2Schema = new mongoose.Schema({
 
-const userSchema = new mongoose.Schema( {
+
     firstName: String,
     lastName: String,
     mobile: {
@@ -16,9 +17,7 @@ const userSchema = new mongoose.Schema( {
     },
     age: Number,
     posts: {type: [], deafult: []},
-
-    isDeleted:{type:String, default:false},
-
+    isDeleted:{type:String,deafult:false}
 }, { timestamps: true });
 
-module.exports = mongoose.model('User3', userSchema)
+module.exports= mongoose.model("User4", user2Schema)
